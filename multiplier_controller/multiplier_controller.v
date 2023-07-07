@@ -28,6 +28,13 @@ module multiplier_controller
     
     always @(*)
     begin
+        state_out <= current_state;
+        input_sel <= 2'bxx;
+        shift_sel <= 2'bxx;
+        done <=0;
+        clk_ena <= 0;
+        sclr_n <= 0;
+    
         case (current_state)
         idle:
             begin
@@ -157,8 +164,7 @@ module multiplier_controller
             end
          default:
          begin
-            current_state <=next_state;
-            state_out <= next_state;
+            next_state <= current_state;
           end            
         endcase
     end
