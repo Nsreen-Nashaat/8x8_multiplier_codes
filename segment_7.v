@@ -8,6 +8,10 @@ module segment_7(
     3'b001: segmentcode = 7'b0110000;
     3'b010: segmentcode = 7'b1101101;
     3'b011: segmentcode = 7'b1111001;
+    3'b100: segmentcode = 7'b0110011;
+    3'b101: segmentcode = 7'b1011011;
+    3'b110: segmentcode = 7'b1011111;
+    3'b111: segmentcode = 7'b1110000;
     default: segmentcode = 7'b1001111;
   endcase
   end
@@ -30,7 +34,7 @@ module segment_7DUT;
   #10
   binary=3'b011;
   #10
-  binary=3'b110;
+  binary=3'b101;
   #10
   $finish;
   end
