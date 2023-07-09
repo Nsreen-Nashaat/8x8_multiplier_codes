@@ -1,0 +1,32 @@
+module tb();
+
+  reg clk,reset_a,start;
+  reg [1:0]count;
+  wire [1:0]input_sel;
+  wire [1:0]shift_sel;
+  wire [2:0]state_out;
+  wire done,clk_ena,sclr_n;
+
+  always
+   begin
+    clk<=1'b1;
+    #100;
+    clk<=1'b0;
+    #100;
+   end
+
+ initial begin
+  reset_a=1'b0;
+   #200;
+  start=1'b1;reset_a=1'b1;
+   #200;
+  start=1'b0;count=2'b00;
+   #200;
+  start=1'b0;count=2'b10;
+   #200;
+  start=1'b0;count=2'b11;
+   #200;
+ end
+multiplier_controller a(clk,reset_a,start,count,input_sel,shift_sel,state_out,done,clk_ena,sclr_n);
+endmodule
+
