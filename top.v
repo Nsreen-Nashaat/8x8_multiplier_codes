@@ -1,9 +1,11 @@
+`timescale 1ns / 1ps
 module top(
 input start,reset_a,clk,
-input[7:0]dataa,datab,
+input[7:0]dataa,
+input[7:0]datab,
 output done_flag,
 output [15:0]product8_8,
-output [0:6] segmentcode
+output seg_a,seg_b,seg_c,seg_d,seg_e,seg_f
 );
 
 wire [1:0] sel;
@@ -24,6 +26,6 @@ full_adder k1(.a(shift_out[15:0]),.b(product8_8[15:0]),.sum(sum[15:0]));
 register q1(.clk(clk),.sclr_n(sclr_n),.clk_ena(clk_ena),.datain(sum[15:0]),.reg_out(product8_8[15:0]));
 multiplier_controller w1(.clk(clk),.reset_a(reset_a),.start(start),.count(count[1:0]),.input_sel(sel[1:0]),.shift_sel(shift[1:0]),.state_out(state_out[2:0]),.done(done_flag),.clk_ena(clk_ena),.sclr_n(sclr_n));
 asyn_2_1_counter r1(.clk(clk),.aclr_n(!start),.count_out(count[1:0]));
-segment_7 t1(.binary(state_out[2:0]),.seg_a(),.seg_b(),.seg_c(),.seg_d(),.seg_e(),.seg_f(),.seg_g());
+segment_7 t1(.binary(state_out[2:0]),.seg_a(seg_a),.seg_b(seg_b),.seg_c(seg_c),.seg_d(seg_d),.seg_e(seg_e),.seg_f(seg_f),.seg_g(seg_g));
 
 endmodule
