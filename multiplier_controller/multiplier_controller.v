@@ -18,90 +18,92 @@ module multiplier_controller
     localparam calc_done = 3'b100;
     localparam err = 3'b101;
     
-    always @(posedge clk, negedge reset_a)
+    always @(posedge clk or negedge reset_a)
     begin
     if(!reset_a)
-        current_state = idle;
+        current_state <= idle;
     else
-        current_state = next_state;
+        current_state <= next_state;
     end
     
     always @(*)
     begin
-        state_out <= current_state;
-        input_sel <= 2'bxx;
-        shift_sel <= 2'bxx;
+        state_out <= idle;
+        input_sel <= 2'b00;
+        shift_sel <= 2'b00;
         done <=0;
         clk_ena <= 0;
         sclr_n <= 0;
     
         case (current_state)
         idle:
+        begin
+            if(start == 1 )
             begin
-                if(start)
-                begin
-                    next_state <= lsb;
-                    state_out <= next_state;
-                    input_sel <= 2'bxx;
-                    shift_sel <= 2'bxx;
-                    done <=0;
-                    clk_ena <= 1;
-                    sclr_n <= 0;
-                end
-                else
-                begin
-                    next_state <= idle;
-                    state_out <= next_state;
-                    input_sel <= 2'bxx;
-                    shift_sel <= 2'bxx;
-                    done <=0;
-                    clk_ena <= 0;
-                    sclr_n <= 1;
-                end
+                next_state <= lsb;
+                state_out <= next_state;
+                input_sel <= 2'bxx;
+                shift_sel <= 2'bxx;
+                done <= 0;
+                clk_ena <= 1;
+                sclr_n <= 0;
             end
+            else if (start ==0)
+            begin
+                next_state <= idle;
+                state_out <= next_state;
+                input_sel <= 2'bxx;
+                shift_sel <= 2'bxx;
+                done <= 0;
+                clk_ena <= 0;
+                sclr_n <= 1;
+            end
+            else
+                next_state <= idle;
+        end
             
-            lsb:
+        lsb:
+        begin
+            if(start == 0 && count == 2'b00 )
             begin
-                if(start ==0 && count ==0 )
-                begin
-                    next_state <= mid;
-                    state_out <= next_state;
-                    input_sel <= 2'b00;
-                    shift_sel <= 2'b00;
-                    done <=0;
-                    clk_ena <= 1;
-                    sclr_n <= 1;
-                end
-                else
-                begin
-                    next_state <= err;
-                    state_out <= next_state;
-                    input_sel <= 2'bxx;
-                    shift_sel <= 2'bxx;
-                    done <=0;
-                    clk_ena <= 0;
-                    sclr_n <= 1;
-                end
+                next_state <= mid;
+                state_out <= mid;
+                input_sel <= 2'b00;
+                shift_sel <= 2'b00;
+                done <= 0;
+                clk_ena <= 1;
+                sclr_n <= 1;
             end
+            else
+            begin
+                next_state <= err;
+                state_out <= next_state;
+                input_sel <= 2'bxx;
+                shift_sel <= 2'bxx;
+                done <= 0;
+                clk_ena <= 0;
+                sclr_n <= 1;
+            end
+        end
              mid:
                begin
-                   if(start ==0 && count == 01 )
+                   if(start == 0 && count == 2'b01 )
                    begin
                        next_state <= mid;
                        state_out <= next_state;
-                       input_sel <= 2'b01;
+                       input_sel <= 2'b10;
                        shift_sel <= 2'b01;
-                       done <=0;
+                       done <= 0;
                        clk_ena <= 1;
                        sclr_n <= 1;
                    end
-                   else if(start ==0 && count == 10 )
+                   else if(start ==0 && count == 2'b10 )
                    begin
                        next_state <= msb;
                        state_out <= next_state;
                        input_sel <= 2'b10;
                        shift_sel <= 2'b01;
-                       done <=0;
+                       done <= 0;
                        clk_ena <= 1;
                        sclr_n <= 1;
                    end
@@ -111,20 +113,20 @@ module multiplier_controller
                       state_out <= next_state;
                       input_sel <= 2'bxx;
                       shift_sel <= 2'bxx;
-                      done <=0;
+                      done <= 0;
                       clk_ena <= 0;
                       sclr_n <= 1;
                    end
               end
               msb:
               begin
-                 if(start ==0 && count == 11 )
+                 if(start ==0 && count == 2'b11 )
                  begin
                      next_state <= calc_done;
                      state_out <= next_state;
                      input_sel <= 2'b11;
                      shift_sel <= 2'b10;
-                     done <=0;
+                     done <= 0;
                      clk_ena <= 1;
                      sclr_n <= 1;
                  end
@@ -134,7 +136,7 @@ module multiplier_controller
                     state_out <= next_state;
                     input_sel <= 2'bxx;
                     shift_sel <= 2'bxx;
-                    done <=0;
+                    done <= 0;
                     clk_ena <= 0;
                     sclr_n <= 1;
                  end
@@ -147,7 +149,7 @@ module multiplier_controller
                      state_out <= next_state;
                      input_sel <= 2'bxx;
                      shift_sel <= 2'bxx;
-                     done <=0;
+                     done <= 0;
                      clk_ena <= 1;
                      sclr_n <= 1;
                  end
@@ -164,7 +166,7 @@ module multiplier_controller
             end
          default:
          begin
-            next_state <= current_state;
+            next_state <= idle;
           end            
         endcase
     end
