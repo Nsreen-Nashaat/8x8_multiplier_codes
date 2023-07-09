@@ -1,7 +1,7 @@
 module segment_7(
   input [2:0] binary,
-  output reg [0:6] segmentcode);
-  
+  output reg seg_a,seg_b,seg_c,seg_d,seg_e,seg_f,seg_g);
+  reg [0:6]segmentcode;
   always @(*)begin
   case(binary)
     3'b000: segmentcode = 7'b1111110;
@@ -14,7 +14,15 @@ module segment_7(
     3'b111: segmentcode = 7'b1110000;
     default: segmentcode = 7'b1001111;
   endcase
-  end
+
+ seg_a=segmentcode[0];
+ seg_b=segmentcode[1];
+ seg_c=segmentcode[2];
+ seg_d=segmentcode[3];
+ seg_e=segmentcode[4];
+ seg_f=segmentcode[5];
+ seg_g=segmentcode[6];
+end
 endmodule
 
 module segment_7DUT;
