@@ -2,26 +2,23 @@
 
 module segment_7DUT;
   reg [2:0] binary;
-  wire [0:6] segmentcode;
-  segment_7 dut 
-  (
-    .binary(binary),
-    .segmentcode(segmentcode)
-  );
+  wire seg_a,seg_b,seg_c,seg_d,seg_e,seg_f,seg_g;
   
+  segment_7 a(binary,seg_a,seg_b,seg_c,seg_d,seg_e,seg_f,seg_g);
   initial 
   begin
-    $monitor("input=%b output=%b",binary,segmentcode);
+    $monitor("input=%b output=%b output=%b output=%b output=%b output=%b output=%b output=%b",binary,seg_a,seg_b,seg_c,seg_d,seg_e,seg_f,seg_g);
     binary=3'b000;
-    #100
+    #100;
     binary=3'b001;
-    #100
+    #100;
     binary=3'b010;
-    #100
+    #100;
     binary=3'b011;
-    #100
+    #100;
     binary=3'b101;
-    #100
+    #100;
     $finish;
     end
+    
     endmodule
