@@ -19,6 +19,8 @@ module multiplier_8x8
     wire [15:0] sum;
     wire [1:0] count;
     wire [2:0] state_out;
+    wire clk_ena;
+    wire sclr_n;
     //wire [0:6] segmentcode;
     
     mux_2_1 a1
@@ -47,7 +49,7 @@ module multiplier_8x8
     left_shifter_8_to_16 s1
     (
         .data_in(product[7:0]),
-        .shift_cntrl(shift),
+        .shift_cntrl(shift[1:0]),
         .data_out(shift_out[15:0])
     );
     
