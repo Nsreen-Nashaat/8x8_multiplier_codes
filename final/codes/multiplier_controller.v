@@ -174,7 +174,7 @@ module multiplier_controller
          end
          default:
          begin
-            state_out <= idle;
+            state_out = idle;
           end            
         endcase
     end

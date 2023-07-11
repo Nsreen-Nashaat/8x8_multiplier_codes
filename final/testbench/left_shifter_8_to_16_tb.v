@@ -6,7 +6,8 @@ module left_shifter_8_to_16_tb;
   reg [1:0] shift_cntrl;
   wire [15:0] data_out;
 
-  left_shifter_8_to_16 uut (
+  left_shifter_8_to_16 uut 
+  (
     .data_in(data_in),
     .shift_cntrl(shift_cntrl),
     .data_out(data_out)

@@ -16,19 +16,27 @@ register_16bit dut(clk,sclr_n,clk_ena,datain,reg_out);
     #100;
    end
 
- initial begin
+ initial 
+ begin
   clk_ena=1'b1;
   sclr_n=1'b0;
-  datain=16'h1234;
+  datain = $random;
   #200;
+  
   clk_ena=1'b1;
   sclr_n=1'b1;
-  datain=16'h1234;
+  datain = $random;
    #200;
+   
   clk_ena=1'b0;
   sclr_n=1'b0;
-  datain=16'h1454;
+  datain = $random;
    #200;
+   
+   clk_ena=1'b1;
+     sclr_n=1'b1;
+     datain = $random;
+      #200;
  end
 
 endmodule

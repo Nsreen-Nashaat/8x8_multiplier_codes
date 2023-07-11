@@ -47,18 +47,18 @@ module multiplier_8x8_tb;
     start = 0;
     reset_a =0;
     clk = 0;
-    dataa = 8'b00000000;
-    datab = 8'b00000000;
+    dataa = $random;
+    datab = $random;
     #2;
     //  Multiplication of 10 and 5
     reset_a = 1 ;
-    dataa = 8'b00001010; // 10
-    datab = 8'b00000101; // 5
+    dataa = 8'b00110010; 
+    datab = 8'b00001010; 
     start = 1;
     #100	
    
     start = 0; 
-    #300;
+    #400;
 
     // Check the result
     $display("Result: %d", product8_8);
@@ -73,8 +73,8 @@ module multiplier_8x8_tb;
     
     // Test scenario 2: Multiplication of 7 and 3
     reset_a =1;
-    dataa = 8'b00000111; // 7
-    datab = 8'b00000011; // 3
+     dataa = 8'b00001010; // 10
+     datab = 8'b00000101; // 5
 
     // Start 
     start = 1;
@@ -87,6 +87,32 @@ module multiplier_8x8_tb;
 
     // Check the result
     $display("Result: %d", product8_8);
+    
+        start = 0;
+        reset_a =0;
+        clk = 0;
+        dataa = 8'b00000000;
+        datab = 8'b00000000;
+        #2;
+        
+        
+        // Test scenario 2: Multiplication of 7 and 3
+        reset_a =1;
+        dataa = 8'b00000111; // 7
+        datab = 8'b00000011; // 3
+    
+        // Start 
+        start = 1;
+    
+        // Wait to complete multiplication
+        #100;
+        start = 0;
+        // Wait to show result
+        #300;
+    
+        // Check the result
+        $display("Result: %d", product8_8);
+    
 
   end
 endmodule

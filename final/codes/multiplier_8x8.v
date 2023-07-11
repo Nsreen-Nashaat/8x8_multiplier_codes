@@ -53,13 +53,6 @@ module multiplier_8x8
         .data_out(shift_out[15:0])
     );
     
-    adder_16bit k1
-    (
-        .a(shift_out[15:0]),
-        .b(product8_8[15:0]),
-        .sum(sum[15:0])
-    );
-    
     register_16bit q1
     (
         .clk(clk),
@@ -68,6 +61,15 @@ module multiplier_8x8
         .datain(sum[15:0]),
         .reg_out(product8_8[15:0])
     );
+    
+    adder_16bit k1
+    (
+        .a(shift_out[15:0]),
+        .b(product8_8[15:0]),
+        .sum(sum[15:0])
+    );
+    
+    
     
     multiplier_controller w1
     (

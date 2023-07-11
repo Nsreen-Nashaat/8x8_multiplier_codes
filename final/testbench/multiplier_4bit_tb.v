@@ -9,23 +9,23 @@ module multiplier_4bit_tb;
    begin
     
     // Test case 1: 3 * 5 = 15
-    a = 3;
-    b = 5;
+    a = 4'b1111;
+    b = 4'b1111;
     #100;
     
     // Test case 2: 10 * 6 = 60
-    a = 10;
-    b = 6;
+    a = 4'b1101;;
+    b = 4'b1000;;
     #100;
     
     // Test case 3: 0 * 9 = 0
-    a = 0;
-    b = 9;
+    a = 4'b1111;;
+    b = 4'b1101;;
     #100;
     
     // Test Case 4 : 5 * 6 = 39 
-    a = 5 ; 
-    b = 6 ;
+    a = 4'b1100; ; 
+    b = 4'b1001; ;
     #100	
     $finish;
   end

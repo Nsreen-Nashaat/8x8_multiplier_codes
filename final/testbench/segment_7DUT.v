@@ -16,8 +16,10 @@ module segment_7DUT;
     #100;
     binary=3'b011;
     #100;
+    binary=3'b100;
+    #50;
     binary=3'b101;
-    #100;
+    #50;
     $finish;
     end
     
