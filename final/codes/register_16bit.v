@@ -7,7 +7,7 @@ module register_16bit
     output reg [15:0]reg_out
 );
 
- always@(posedge clk,posedge clk_ena,posedge sclr_n)
+ always@(posedge clk)
  begin
   if(clk_ena==1'b1&sclr_n==1'b0)
      reg_out<=16'b0;
