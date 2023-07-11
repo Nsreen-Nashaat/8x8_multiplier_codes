@@ -32,25 +32,25 @@ multiplier_controller dut
 
 initial 
 begin
- reset_a=1'b0;   start =0;
+ reset_a<=1'b0;   start <=0;
   #2;
-    reset_a=1'b1;
+    reset_a<=1'b1;
   #100;
     start=1'b1;
    #100
-    start= 0;   count = 2'b00;
+    start= 0;   count <= 2'b00;
   #100;
-    start= 0;   count = 2'b10;
+    start= 0;   count <= 2'b10;
   #100;
-    start= 0;   count=2'b11;
+    start<= 0;   count<=2'b11;
   #100;
-  start= 0;  
+  start<= 0;  
   #100;
-  start= 1;  
+  start<= 1;  
   #100;
-   start= 0;  
+   start<= 0;  
   #100;
-   start= 1;  
+   start<= 1;  
   #100;
 end
 
