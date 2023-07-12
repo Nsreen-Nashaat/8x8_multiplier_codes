@@ -3,10 +3,11 @@
 module segment_7
 (
   input [2:0] binary,
-  output reg seg_a,seg_b,seg_c,seg_d,seg_e,seg_f,seg_g,
-  reg [0:6]segmentcode
- );
+  output reg seg_a,seg_b,seg_c,seg_d,seg_e,seg_f,seg_g
   
+ );
+ 
+  reg [0:6]segmentcode;
   always @(*)
   begin
   case(binary)
