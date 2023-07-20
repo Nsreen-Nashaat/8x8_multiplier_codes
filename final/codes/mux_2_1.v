@@ -9,7 +9,7 @@ module mux_2_1
 
 always @(*)
     begin
-      out = 'b0;
+      //out = 'b0;
       if(sel == 0)
         out = in_a;
       else

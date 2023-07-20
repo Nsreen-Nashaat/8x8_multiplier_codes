@@ -13,7 +13,8 @@ module multiplier_4bit(
     shift_count = 0;
 
     // Perform multiplication using addition and shifting
-    for (shift_count = 0; shift_count < 4; shift_count = shift_count + 1) begin
+    for (shift_count = 0; shift_count < 4; shift_count = shift_count + 1) 
+    begin
       if (b[shift_count] == 1)
         partial_product = partial_product + (a << shift_count);
     end

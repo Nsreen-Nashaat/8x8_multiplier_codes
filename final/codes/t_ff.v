@@ -15,7 +15,7 @@ begin
     else
         state <= ~state;
 end
-//    assign next_state = t ? ~state : state;
+
     assign q = state;
     assign nq = ~state;
 
